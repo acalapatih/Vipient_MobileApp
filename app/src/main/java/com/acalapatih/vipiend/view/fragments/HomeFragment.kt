@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.acalapatih.vipiend.BuildConfig
 import com.acalapatih.vipiend.CheckInternetConnection
 import com.acalapatih.vipiend.R
 import com.acalapatih.vipiend.SharedPreference
@@ -34,7 +35,6 @@ import com.acalapatih.vipiend.db.DbHelper
 import com.acalapatih.vipiend.model.Server
 import com.acalapatih.vipiend.utils.CsvParser
 import com.acalapatih.vipiend.utils.toast
-import com.acalapatih.vipiend.view.activites.ChangeServerActivity
 import com.badoo.mobile.util.WeakHandler
 import com.facebook.ads.InterstitialAd
 import de.blinkt.openvpn.OpenVpnApi
@@ -75,27 +75,20 @@ class HomeFragment : Fragment() {
     private var request: Request? = null
     private lateinit var dbHelper: DbHelper
 
-    private lateinit var server: Server
+    private var server: Server? = null
     private var isServerSelected: Boolean = false
 
     private var facebookInterstitialAd: InterstitialAd? = null
-
-    private val getServerResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val selectedServer = initObserver()
-                globalServer = selectedServer
-
-                binding!!.connectionIp.text = selectedServer.getIpAddress()
-                isServerSelected = true
-            }
-        }
 
     private val vpnResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { vpnResult ->
             if (vpnResult.resultCode == Activity.RESULT_OK) {
                 //Permission granted, start the VPN
-                startVpn()
+                val selectedServer = initObserver()
+                if (selectedServer != null) {
+                    globalServer = selectedServer
+                }
+                startVpn(globalServer)
             } else {
                 mContext.toast("For a successful VPN connection, permission must be granted.")
             }
@@ -131,15 +124,23 @@ class HomeFragment : Fragment() {
         isServiceRunning()
         VpnStatus.initLogCache(mContext.cacheDir)
 
+        handler = WeakHandler()
+        dbHelper = DbHelper.getInstance(mContext)
+        if (request == null) {
+            request = Request.Builder()
+                .url(BuildConfig.VPN_GATE_API)
+                .build()
+        }
+
         binding!!.connectionButtonBlock.setOnClickListener {
-            if (!vpnStart && isServerSelected) {
-                prepareVpn()
-            } else if (!isServerSelected && !vpnStart) {
-                getServerResult.launch(
-                    Intent(mContext, ChangeServerActivity::class.java)
-                )
-            } else if (vpnStart && !isServerSelected) {
-                mContext.toast(resources.getString(R.string.disconnect_first))
+            if (!vpnStart) {
+                val selectedServer = initObserver()
+                if (selectedServer != null) {
+                    globalServer = selectedServer
+                    prepareVpn(globalServer)
+                }
+
+                isServerSelected = true
             } else {
                 mContext.toast("Unable to connect the VPN")
             }
@@ -227,7 +228,7 @@ class HomeFragment : Fragment() {
         notificationManager.notify(1, notification)
     }
 
-    private fun initObserver(): Server {
+    private fun initObserver(): Server? {
         mCall = request?.let { okHttpClient.newCall(it) }
         mCall!!.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -333,14 +334,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun prepareVpn() {
+    private fun prepareVpn(globalServer: Server) {
         if (!vpnStart) {
             if (getInternetStatus()) {
                 val intent = VpnService.prepare(context)
                 if (intent != null) {
                     vpnResult.launch(intent)
                 } else {
-                    startVpn()
+                    startVpn(globalServer)
                 }
                 status("Connecting")
             } else {
@@ -380,7 +381,7 @@ class HomeFragment : Fragment() {
         return false
     }
 
-    private fun startVpn() {
+    private fun startVpn(globalServer: Server) {
         try {
             val conf = globalServer.getOvpnConfigData()
             OpenVpnApi.startVpn(context, conf, globalServer.getCountryShort(), "vpn", "vpn")

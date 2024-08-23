@@ -4,8 +4,8 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="16"
-6-->C:\Users\Acalapatih\Downloads\vpn-free-unlimited vpn by Foysal\Vipiend\vpnLib\src\main\AndroidManifest.xml
+6-->C:\Users\Acalapatih\AndroidStudioProjects\Vipiend\vpnLib\src\main\AndroidManifest.xml
 7        android:targetSdkVersion="30" />
-7-->C:\Users\Acalapatih\Downloads\vpn-free-unlimited vpn by Foysal\Vipiend\vpnLib\src\main\AndroidManifest.xml
+7-->C:\Users\Acalapatih\AndroidStudioProjects\Vipiend\vpnLib\src\main\AndroidManifest.xml
 8
 9</manifest>
