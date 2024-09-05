@@ -9,7 +9,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/acalapatih/Hafalin_mobileApp">
-    <img src="image/logo_hafalin.png" alt="Logo" width="200" height="200">
+    <img src="image/logo_vipiend.png" alt="Logo" width="200" height="200">
   </a>
 
   <h1 align="center">Vipiend Mobile App</h3>
@@ -17,14 +17,14 @@
   <p align="center">
     A trusted VPN Service Application.
     <br />
-    <a href="https://github.com/acalapatih/Hafalin_mobileApp"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/acalapatih/Vipiend_mobileApp"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/acalapatih/Hafalin_mobileApp">View Demo</a>
+    <a href="https://github.com/acalapatih/Vipiend_mobileApp">View Demo</a>
     ·
-    <a href="https://github.com/acalapatih/Hafalin_mobileApp/issues">Report Bug</a>
+    <a href="https://github.com/acalapatih/Vipiend_mobileApp/issues">Report Bug</a>
     ·
-    <a href="https://github.com/acalapatih/Hafalin_mobileApp/issues">Request Feature</a>
+    <a href="https://github.com/acalapatih/Vipiend_mobileApp/issues">Request Feature</a>
   </p>
 </div>
 
@@ -84,15 +84,15 @@ Vipiend is a VPN application that implements OpenVPN as a service. This app conn
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/acalapatih/Hafalin_mobileApp.svg?style=for-the-badge
-[contributors-url]: https://github.com/acalapatih/Hafalin_mobileApp/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/acalapatih/Hafalin_mobileApp.svg?style=for-the-badge
-[forks-url]:https://github.com/acalapatih/Hafalin_mobileApp/network/members
-[stars-shield]: https://img.shields.io/github/stars/acalapatih/Hafalin_mobileApp.svg?style=for-the-badge
-[stars-url]: https://github.com/acalapatih/Hafalin_mobileApp/stargazers
-[issues-shield]: https://img.shields.io/github/issues/acalapatih/Hafalin_mobileApp.svg?style=for-the-badge
-[issues-url]: https://github.com/acalapatih/Hafalin_mobileApp/issues
+[contributors-shield]: https://img.shields.io/github/contributors/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
+[contributors-url]: https://github.com/acalapatih/Vipiend_mobileApp/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
+[forks-url]:https://github.com/acalapatih/Vipiend_mobileApp/network/members
+[stars-shield]: https://img.shields.io/github/stars/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
+[stars-url]: https://github.com/acalapatih/Vipiend_mobileApp/stargazers
+[issues-shield]: https://img.shields.io/github/issues/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
+[issues-url]: https://github.com/acalapatih/Vipiend_mobileApp/issues
 [license-shield]: https://img.shields.io/github/license/acalapatih/MobilePQI_mobileApp.svg?style=for-the-badge
-[license-url]: https://github.com/acalapatih/Hafalin_mobileApp/blob/main/LICENSE
+[license-url]: https://github.com/acalapatih/Vipiend_mobileApp/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/amir-acalapati-henry
