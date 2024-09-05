@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/acalapatih/Hafalin_mobileApp">
+  <a href="https://github.com/acalapatih/Vipiend_mobileApp">
     <img src="image/logo_vipiend.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -92,7 +92,7 @@ Vipiend is a VPN application that implements OpenVPN as a service. This app conn
 [stars-url]: https://github.com/acalapatih/Vipiend_mobileApp/stargazers
 [issues-shield]: https://img.shields.io/github/issues/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
 [issues-url]: https://github.com/acalapatih/Vipiend_mobileApp/issues
-[license-shield]: https://img.shields.io/github/license/acalapatih/MobilePQI_mobileApp.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/acalapatih/Vipiend_mobileApp.svg?style=for-the-badge
 [license-url]: https://github.com/acalapatih/Vipiend_mobileApp/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/amir-acalapati-henry
