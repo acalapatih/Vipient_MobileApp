@@ -127,6 +127,7 @@
 
     <string name="developers_email" translatable="false">your_developer_email</string>
     <string name="privacy_policy_link" translatable="false">https://www.google.com</string>
+    <string name="tv_developed">Developed by Acalapatih with OpenVPN</string>
 
     <!--Fields needed to be replaced by user-->
 

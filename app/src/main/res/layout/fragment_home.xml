@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,7 +21,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/app_name"
             android:textColor="#000435"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="Developed by Acalapatih with OpenVPN"
+            android:text="@string/tv_developed"
             app:layout_constraintStart_toStartOf="@id/tv_vipient"
             app:layout_constraintTop_toBottomOf="@id/tv_vipient" />
 
@@ -61,6 +60,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:clickable="true"
+            android:focusable="true"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -283,6 +283,7 @@
         android:background="@drawable/disconnect_vpn_bg"
         android:clickable="true"
         android:elevation="1dp"
+        android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"

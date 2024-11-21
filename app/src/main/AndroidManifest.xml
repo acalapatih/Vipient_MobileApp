@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:enableOnBackInvokedCallback="true"
-        tools:replace="android:extractNativeLibs">
+        tools:replace="android:extractNativeLibs"
+        tools:targetApi="tiramisu">
         <activity
             android:name="com.acalapatih.vipient.view.activites.SplashActivity"
             android:exported="true">
