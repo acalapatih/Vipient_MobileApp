@@ -9,7 +9,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/acalapatih/Vipient_MobileApp">
-    <img src="image/logo_vipiend.png" alt="Logo" width="200" height="200">
+    <img src="image/logo_vipient.png" alt="Logo" width="200" height="200">
   </a>
 
   <h1 align="center">Vipient Mobile App</h3>
