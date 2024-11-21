@@ -120,7 +120,7 @@
     <string name="allow_vpn_changes">Allow changes to VPN Profiles</string>
     <string name="allowed_apps">Allowed apps: %s</string>
     <string name="allowed_vpn_apps_info">Allowed VPN apps: %1$s</string>
-    <string name="app">OpenVPN for Android</string>
+    <string name="app">Vipient</string>
     <string name="app_no_longer_exists">Package %s is no longer installed, removing it from app allow/disallow list</string>
     <string name="appbehaviour">Application behaviour</string>
     <string name="apprest_name">Name</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.acalapatih.vipiend">
+    package="com.acalapatih.vipient">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -21,19 +21,19 @@
         android:enableOnBackInvokedCallback="true"
         tools:replace="android:extractNativeLibs">
         <activity
-            android:name=".view.activites.SplashActivity"
+            android:name="com.acalapatih.vipient.view.activites.SplashActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".view.activites.ChangeServerActivity"
+            android:name="com.acalapatih.vipient.view.activites.ChangeServerActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activites.SubscriptionActivity"
+            android:name="com.acalapatih.vipient.view.activites.SubscriptionActivity"
             android:exported="false" />
-        <activity android:name=".view.activites.faq_activity" />
-        <activity android:name=".view.activites.loadingWebData" />
+        <activity android:name="com.acalapatih.vipient.view.activites.faq_activity" />
+        <activity android:name="com.acalapatih.vipient.view.activites.loadingWebData" />
         <activity
-            android:name=".view.activites.ControllerActivity"
+            android:name="com.acalapatih.vipient.view.activites.ControllerActivity"
             android:exported="true">
 
             <intent-filter>
@@ -61,7 +61,7 @@
 
         <provider
             android:name="de.blinkt.openvpn.FileProvider"
-            android:authorities="com.acalapatih.vipiend"
+            android:authorities="com.acalapatih.vipient"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

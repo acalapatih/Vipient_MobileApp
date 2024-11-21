@@ -659,6 +659,7 @@ int drawable btn_radio_off_mtrl 0x0
 int drawable btn_radio_off_to_on_mtrl_animation 0x0
 int drawable btn_radio_on_mtrl 0x0
 int drawable btn_radio_on_to_off_mtrl_animation 0x0
+int drawable ic_logo 0x0
 int drawable ic_menu_archive 0x0
 int drawable ic_menu_close_clear_cancel 0x0
 int drawable ic_menu_copy_holo_light 0x0

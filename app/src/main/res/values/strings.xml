@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vipiend</string>
+    <string name="app_name">Vipient</string>
     <string name="connection_close_confirm">Would you like to cancel the current VPN Connection?</string>
     <string name="help">Faq</string>
     <string name="no">NO</string>

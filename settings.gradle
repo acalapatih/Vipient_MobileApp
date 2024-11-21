@@ -1,2 +1,2 @@
 include ':app', ':vpnLib'
-rootProject.name='Vipiend'
+rootProject.name='Vipient'
