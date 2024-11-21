@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/acalapatih/Vipiend_mobileApp">
+  <a href="https://github.com/acalapatih/Vipient_MobileApp">
     <img src="image/logo_vipiend.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -17,14 +17,14 @@
   <p align="center">
     A trusted VPN Service Application.
     <br />
-    <a href="https://github.com/acalapatih/Vipiend_mobileApp"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/acalapatih/Vipient_MobileApp"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/acalapatih/Vipiend_mobileApp">View Demo</a>
+    <a href="https://github.com/acalapatih/Vipient_MobileApp">View Demo</a>
     ·
-    <a href="https://github.com/acalapatih/Vipiend_mobileApp/issues">Report Bug</a>
+    <a href="https://github.com/acalapatih/Vipient_MobileApp/issues">Report Bug</a>
     ·
-    <a href="https://github.com/acalapatih/Vipiend_mobileApp/issues">Request Feature</a>
+    <a href="https://github.com/acalapatih/Vipient_MobileApp/issues">Request Feature</a>
   </p>
 </div>
 
@@ -84,15 +84,15 @@ Vipient is a VPN application that implements OpenVPN as a service. This app conn
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/acalapatih/Vipient_mobileApp.svg?style=for-the-badge
-[contributors-url]: https://github.com/acalapatih/Vipient_mobileApp/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/acalapatih/Vipient_mobileApp.svg?style=for-the-badge
-[forks-url]:https://github.com/acalapatih/Vipient_mobileApp/network/members
-[stars-shield]: https://img.shields.io/github/stars/acalapatih/Vipient_mobileApp.svg?style=for-the-badge
-[stars-url]: https://github.com/acalapatih/Vipient_mobileApp/stargazers
-[issues-shield]: https://img.shields.io/github/issues/acalapatih/Vipient_mobileApp.svg?style=for-the-badge
-[issues-url]: https://github.com/acalapatih/Vipient_mobileApp/issues
-[license-shield]: https://img.shields.io/github/license/acalapatih/Vipient_mobileApp.svg?style=for-the-badge
-[license-url]: https://github.com/acalapatih/Vipient_mobileApp/blob/main/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/acalapatih/Vipient_MobileApp.svg?style=for-the-badge
+[contributors-url]: https://github.com/acalapatih/Vipient_MobileApp/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/acalapatih/Vipient_MobileApp.svg?style=for-the-badge
+[forks-url]:https://github.com/acalapatih/Vipient_MobileApp/network/members
+[stars-shield]: https://img.shields.io/github/stars/acalapatih/Vipient_MobileApp.svg?style=for-the-badge
+[stars-url]: https://github.com/acalapatih/Vipient_MobileApp/stargazers
+[issues-shield]: https://img.shields.io/github/issues/acalapatih/Vipient_MobileApp.svg?style=for-the-badge
+[issues-url]: https://github.com/acalapatih/Vipient_MobileApp/issues
+[license-shield]: https://img.shields.io/github/license/acalapatih/Vipient_MobileApp.svg?style=for-the-badge
+[license-url]: https://github.com/acalapatih/Vipient_MobileApp/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/amir-acalapati-henry
