@@ -15,7 +15,7 @@
   <h1 align="center">Vipient Mobile App</h3>
 
   <p align="center">
-    A trusted VPN Service Application.
+    A trusted VPN Service Application with VPN Gate servers.
     <br />
     <a href="https://github.com/acalapatih/Vipient_MobileApp"><strong>Explore the docs »</strong></a>
     <br />

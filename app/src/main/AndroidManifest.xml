@@ -28,10 +28,6 @@
         <activity
             android:name="com.acalapatih.vipient.view.activites.ChangeServerActivity"
             android:exported="false" />
-        <activity
-            android:name="com.acalapatih.vipient.view.activites.SubscriptionActivity"
-            android:exported="false" />
-        <activity android:name="com.acalapatih.vipient.view.activites.faq_activity" />
         <activity android:name="com.acalapatih.vipient.view.activites.loadingWebData" />
         <activity
             android:name="com.acalapatih.vipient.view.activites.ControllerActivity"

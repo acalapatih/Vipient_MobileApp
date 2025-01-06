@@ -64,52 +64,7 @@
     <string name="country_name">No Server Selected</string>
     <string name="IP_address">Server IP Address</string>
 
-    <string name="one_month_text">1 Month</string>
-    <string name="three_months_text">3 Months</string>
-    <string name="one_year_text">1 Year</string>
-
-    <!--rating dialog-->
-    <string name="feedback_email_subject" translatable="false">Liberty VPN</string>
-
-    <string name="rating_promote">We are working hard for a better user experience. \nWe\'d greatly appreciate if you can rate us.</string>
-    <string name="rating_title_1">Oh, no!</string>
-    <string name="rating_title_2">We like you too!</string>
-    <string name="rating_text_1">Please leave us some feedback.</string>
-    <string name="rating_text_4">Thanks for your feedback.</string>
-    <string name="rating_text_5">The best we can get :)</string>
-    <!--rating dialog-->
-
-    <string-array name="faq_questions">
-        <item>Why I need a VPN?</item>
-        <item>Is it safe?</item>
-        <item>How to use Liberty VPN?</item>
-        <item>How to disconnect Liberty VPN?</item>
-        <item>Can\’t connect, not stable or speed is slow.</item>
-        <item>How to switch server location?</item>
-        <item>Can\’t find the server you want?</item>
-        <item>Why can\'t I use Internet after connection established?</item>
-        <item>How to disable battery optimization for Liberty VPN?</item>
-        <item>How to cancel the subscription in Google play?</item>
-        <item>Can I get refund?</item>
-    </string-array>
-
-    <string-array name="faq_answers">
-        <item>VPN is virtual private network. It allows you to stay private, stay secure, and access any online blocked content you want, no matter where you from.</item>
-        <item>We use SSL to encrypt your internet data. Your data is undecipherable to prying eyes while in route. Moreover, we do not collect, log, store, share any data log belonging to users, and please feel safe to use our product.</item>
-        <item>Click the \"Start\" button on the middle place of the home page. Then please “Trust this application” if your device asks for this permission.</item>
-        <item>Click the same connect button on the home page to disconnect from VPN server.</item>
-        <item>Connection problem is affected by many factors, please update to the latest version, refresh the server list and connect to the top server for few times. If it still does not work for you, please contact us via libertyapps.studio@gmail.com and provide us with your country and network provider name.</item>
-        <item>Choose the location you want in the server list, then VPN will connect to the location you click.</item>
-        <item>Please contact and provide us the detail website address that you want to unblock via libertyapps.studio@gmail.com We will collect your feedback and improve our product.</item>
-        <item>First of all, check your network connection. Then make sure you\'ve disable battery optimization for Liberty VPN in android\'s battery settings.</item>
-        <item>In most Android devices, Open Settings > Battery > Battery Optimization > Select all apps in drop down menu. Find Liberty VPN and set it "Don\'t optimize".In Huawei devices, Open Setting > Battery > Launch, Find Liberty VPN in the apps list,switch off to "Manage manually", enable "Auto Lunch" and "Run in background". Or you can find battery setting in "Protected Apps".In Samsung devices, Open settings > Battery > App Power Saving > Details, find Liberty VPN in the apps list and disable it.In other devices, you may find it in Setting > Battery > as "Background activity" or "Protected Apps"</item>
-        <item>Subscriptions on Google Play renew automatically unless you unsubscribe, if you want to unsubscribe, please open Google Play Store, tap Menu-Subscriptions-Tap thesubscription you want to cancel-Tap Cancel subscription. Check the details here: https://support.google.com/googleplay/answer/2476088</item>
-        <item>Not cancelling your subscription before the trial period ends will not be refunded. Check the details here: https://support.google.com/googleplay/answer/2476088</item>
-    </string-array>
-
     <string name="disconnect_first">In order to change the server, please disconnect the VPN first</string>
-    <string name="share_app_text" translatable="false">Check this awesome free VPN. You can unblock any website and enjoy tons of free server, Download now Liberty VPN</string>
-    <string name="share_msg" translatable="false">Check this awesome free VPN. You can unblock any website and enjoy tons of free server, Download now Liberty VPN</string>
 
     <string name="info_dialog_title">Credits</string>
     <string name="info_dialog_details">All of these servers are being provided by the VPN gate project and they are offering their service free of charge. You can read more about the VPN gate project at <a href="https://www.vpngate.net/en/">https://www.vpngate.net/en/</a></string>
@@ -127,7 +82,7 @@
 
     <string name="developers_email" translatable="false">your_developer_email</string>
     <string name="privacy_policy_link" translatable="false">https://www.google.com</string>
-    <string name="tv_developed">Developed by Acalapatih with OpenVPN</string>
+    <string name="tv_developed">Developed by Acalapatih Dev</string>
 
     <!--Fields needed to be replaced by user-->
 

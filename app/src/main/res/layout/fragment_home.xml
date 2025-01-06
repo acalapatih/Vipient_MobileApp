@@ -113,7 +113,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/after_connection_text2" />
 
-
             <TextView
                 android:id="@+id/vpn_connection_time"
                 android:layout_width="wrap_content"

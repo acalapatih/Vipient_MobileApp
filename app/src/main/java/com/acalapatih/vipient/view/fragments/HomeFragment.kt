@@ -174,7 +174,7 @@ class HomeFragment : Fragment() {
                 binding!!.connectionTextStatus.text = "Disconnected"
             }
             "CONNECTED" -> {
-                vpnStart = true // it will use after restart this activity
+                vpnStart = true
                 status("Connected")
                 binding!!.connectionTextStatus.text = "Connected"
             }
@@ -274,7 +274,7 @@ class HomeFragment : Fragment() {
      * Broadcast receivers ***************************
      */
 
-    var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
+    private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
                 setStatus(intent.getStringExtra("state"))
