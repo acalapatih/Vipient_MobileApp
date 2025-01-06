@@ -7,7 +7,7 @@ import com.acalapatih.vipient.model.Server;
 
 public class SharedPreference {
 
-    private static final String APP_PREFS_NAME = "LibertyVPNPreference";
+    private static final String APP_PREFS_NAME = "VipientPreference";
 
     private SharedPreferences mPreference;
     private SharedPreferences.Editor mPrefEditor;

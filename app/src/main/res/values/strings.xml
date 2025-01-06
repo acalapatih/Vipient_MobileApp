@@ -17,11 +17,8 @@
     <string name="drawer_policy_text">PRIVACY POLICY</string>
     <string name="drawer_faq_text">FAQs</string>
 
-
     <string name="app_version_text" translatable="false">Version 1.0.0</string>
-    <string name="about_app_text" translatable="false">You are using Liberty VPN build v1.0.0, Enjoy unlimited bandwidth with stable connection and a lot of servers to choose from. No limits, No restrictions</string>
 
-    <string name="app_name_premium">Liberty VPN Premium</string>
     <string name="privacy_policy_title" translatable="false">Privacy Policy</string>
     <string name="unlimited_text">Unlimited</string>
     <string name="secure_text">Secure</string>

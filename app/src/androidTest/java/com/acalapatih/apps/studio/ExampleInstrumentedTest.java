@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.liberty.apps.studio.libertyvpn", appContext.getPackageName());
+        assertEquals("com.acalapatih.apps.studio", appContext.getPackageName());
     }
 }
