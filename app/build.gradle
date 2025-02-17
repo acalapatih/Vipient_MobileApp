@@ -7,9 +7,9 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
     compileSdk 34
     defaultConfig {
-        minSdk 21
-        targetSdk 33
-        versionCode 1
+        minSdk 34
+        targetSdk 34
+        versionCode 5
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId 'com.acalapatih.vipiend'
@@ -18,8 +18,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel "FULL"
+            }
         }
     }
     buildFeatures {
@@ -75,7 +79,7 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:6.8.0'
     implementation 'com.onesignal:OneSignal:4.7.0'
 
-    def billing_version = "3.0.3"
+    def billing_version = "6.0.1"
     implementation "com.android.billingclient:billing:$billing_version"
 
     implementation platform('com.google.firebase:firebase-bom:29.3.0')

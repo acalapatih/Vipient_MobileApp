@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "124016817503",
-    "project_id": "vipiend22",
-    "storage_bucket": "vipiend22.appspot.com"
+    "project_number": "661183716201",
+    "project_id": "vipient22",
+    "storage_bucket": "vipient22.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:124016817503:android:876bf8292b384ee042b2ea",
+        "mobilesdk_app_id": "1:661183716201:android:2267c2b059f4f8a0c1fbf8",
         "android_client_info": {
           "package_name": "com.acalapatih.vipiend"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA1leJ6oEylyr7XxddrnwcNkPf8xrmf3Ac"
+          "current_key": "AIzaSyCZdMIYkVtuA01zbgRQHMZsVZkD74dsdbU"
         }
       ],
       "services": {
