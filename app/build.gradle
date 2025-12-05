@@ -5,12 +5,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdk 34
+    namespace 'com.acalapatih.vipient'
+    compileSdk 36
     defaultConfig {
-        minSdk 34
-        targetSdk 34
-        versionCode 5
-        versionName "1.0"
+        minSdk 33
+        targetSdk 36
+        versionCode 6
+        versionName '1.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId 'com.acalapatih.vipiend'
         multiDexEnabled true
@@ -29,10 +30,15 @@ android {
     buildFeatures {
         dataBinding true
         viewBinding true
+        buildConfig true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 
@@ -75,7 +81,7 @@ dependencies {
     implementation 'com.github.florent37:expansionpanel:1.2.4'          //Expandable List
 
     //ads sdk
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
+    implementation 'com.google.android.gms:play-services-ads:24.8.0'
     implementation 'com.facebook.android:audience-network-sdk:6.8.0'
     implementation 'com.onesignal:OneSignal:4.7.0'
 

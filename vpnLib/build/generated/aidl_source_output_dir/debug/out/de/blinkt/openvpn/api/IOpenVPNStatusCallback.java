@@ -12,9 +12,7 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
   /** Default implementation for IOpenVPNStatusCallback. */
   public static class Default implements de.blinkt.openvpn.api.IOpenVPNStatusCallback
   {
-    /**
-         * Called when the service has a new status for you.
-         */
+    /** Called when the service has a new status for you. */
     @Override public void newStatus(java.lang.String uuid, java.lang.String state, java.lang.String message, java.lang.String level) throws android.os.RemoteException
     {
     }
@@ -26,7 +24,6 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements de.blinkt.openvpn.api.IOpenVPNStatusCallback
   {
-    private static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.IOpenVPNStatusCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -54,6 +51,9 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -61,9 +61,11 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_newStatus:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -73,13 +75,14 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
           java.lang.String _arg3;
           _arg3 = data.readString();
           this.newStatus(_arg0, _arg1, _arg2, _arg3);
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements de.blinkt.openvpn.api.IOpenVPNStatusCallback
     {
@@ -96,9 +99,7 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      /**
-           * Called when the service has a new status for you.
-           */
+      /** Called when the service has a new status for you. */
       @Override public void newStatus(java.lang.String uuid, java.lang.String state, java.lang.String message, java.lang.String level) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -109,37 +110,15 @@ public interface IOpenVPNStatusCallback extends android.os.IInterface
           _data.writeString(message);
           _data.writeString(level);
           boolean _status = mRemote.transact(Stub.TRANSACTION_newStatus, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().newStatus(uuid, state, message, level);
-            return;
-          }
         }
         finally {
           _data.recycle();
         }
       }
-      public static de.blinkt.openvpn.api.IOpenVPNStatusCallback sDefaultImpl;
     }
     static final int TRANSACTION_newStatus = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-    public static boolean setDefaultImpl(de.blinkt.openvpn.api.IOpenVPNStatusCallback impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static de.blinkt.openvpn.api.IOpenVPNStatusCallback getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
-  /**
-       * Called when the service has a new status for you.
-       */
+  public static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.IOpenVPNStatusCallback";
+  /** Called when the service has a new status for you. */
   public void newStatus(java.lang.String uuid, java.lang.String state, java.lang.String message, java.lang.String level) throws android.os.RemoteException;
 }

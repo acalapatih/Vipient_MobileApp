@@ -15,7 +15,7 @@ package com.android.vending.billing;
  *    in-app items are consumable and thereafter can be purchased again.
  * 5. An API to get current purchases of the user immediately. This will not contain any
  *    consumed purchases.
- *
+ * 
  * All calls will give a response code with the following possible values
  * RESULT_OK = 0 - success
  * RESULT_USER_CANCELED = 1 - user pressed back or canceled a dialog
@@ -32,109 +32,109 @@ public interface IInAppBillingService extends android.os.IInterface
   public static class Default implements com.android.vending.billing.IInAppBillingService
   {
     /**
-         * Checks support for the requested billing API version, package and in-app type.
-         * Minimum API version supported by this interface is 3.
-         * @param apiVersion the billing version which the app is using
-         * @param packageName the package name of the calling app
-         * @param type type of the in-app item being purchased "inapp" for one-time purchases
-         *        and "subs" for subscription.
-         * @return RESULT_OK(0) on success, corresponding result code on failures
-         */
+     * Checks support for the requested billing API version, package and in-app type.
+     * Minimum API version supported by this interface is 3.
+     * @param apiVersion the billing version which the app is using
+     * @param packageName the package name of the calling app
+     * @param type type of the in-app item being purchased "inapp" for one-time purchases
+     *        and "subs" for subscription.
+     * @return RESULT_OK(0) on success, corresponding result code on failures
+     */
     @Override public int isBillingSupported(int apiVersion, java.lang.String packageName, java.lang.String type) throws android.os.RemoteException
     {
       return 0;
     }
     /**
-         * Provides details of a list of SKUs
-         * Given a list of SKUs of a valid type in the skusBundle, this returns a bundle
-         * with a list JSON strings containing the productId, price, title and description.
-         * This API can be called with a maximum of 20 SKUs.
-         * @param apiVersion billing API version that the Third-party is using
-         * @param packageName the package name of the calling app
-         * @param skusBundle bundle containing a StringArrayList of SKUs with key "ITEM_ID_LIST"
-         * @return Bundle containing the following key-value pairs
-         *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-         *              failure as listed above.
-         *         "DETAILS_LIST" with a StringArrayList containing purchase information
-         *              in JSON format similar to:
-         *              '{ "productId" : "exampleSku", "type" : "inapp", "price" : "$5.00",
-         *                 "title : "Example Title", "description" : "This is an example description" }'
-         */
+     * Provides details of a list of SKUs
+     * Given a list of SKUs of a valid type in the skusBundle, this returns a bundle
+     * with a list JSON strings containing the productId, price, title and description.
+     * This API can be called with a maximum of 20 SKUs.
+     * @param apiVersion billing API version that the Third-party is using
+     * @param packageName the package name of the calling app
+     * @param skusBundle bundle containing a StringArrayList of SKUs with key "ITEM_ID_LIST"
+     * @return Bundle containing the following key-value pairs
+     *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+     *              failure as listed above.
+     *         "DETAILS_LIST" with a StringArrayList containing purchase information
+     *              in JSON format similar to:
+     *              '{ "productId" : "exampleSku", "type" : "inapp", "price" : "$5.00",
+     *                 "title : "Example Title", "description" : "This is an example description" }'
+     */
     @Override public android.os.Bundle getSkuDetails(int apiVersion, java.lang.String packageName, java.lang.String type, android.os.Bundle skusBundle) throws android.os.RemoteException
     {
       return null;
     }
     /**
-         * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
-         * the type, a unique purchase token and an optional developer payload.
-         * @param apiVersion billing API version that the app is using
-         * @param packageName package name of the calling app
-         * @param sku the SKU of the in-app item as published in the developer console
-         * @param type the type of the in-app item ("inapp" for one-time purchases
-         *        and "subs" for subscription).
-         * @param developerPayload optional argument to be sent back with the purchase information
-         * @return Bundle containing the following key-value pairs
-         *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-         *              failure as listed above.
-         *         "BUY_INTENT" - PendingIntent to start the purchase flow
-         *
-         * The Pending intent should be launched with startIntentSenderForResult. When purchase flow
-         * has completed, the onActivityResult() will give a resultCode of OK or CANCELED.
-         * If the purchase is successful, the result data will contain the following key-value pairs
-         *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-         *              failure as listed above.
-         *         "INAPP_PURCHASE_DATA" - String in JSON format similar to
-         *              '{"orderId":"12999763169054705758.1371079406387615",
-         *                "packageName":"com.example.app",
-         *                "productId":"exampleSku",
-         *                "purchaseTime":1345678900000,
-         *                "purchaseToken" : "122333444455555",
-         *                "developerPayload":"example developer payload" }'
-         *         "INAPP_DATA_SIGNATURE" - String containing the signature of the purchase data that
-         *                                  was signed with the private key of the developer
-         *                                  TODO: change this to app-specific keys.
-         */
+     * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
+     * the type, a unique purchase token and an optional developer payload.
+     * @param apiVersion billing API version that the app is using
+     * @param packageName package name of the calling app
+     * @param sku the SKU of the in-app item as published in the developer console
+     * @param type the type of the in-app item ("inapp" for one-time purchases
+     *        and "subs" for subscription).
+     * @param developerPayload optional argument to be sent back with the purchase information
+     * @return Bundle containing the following key-value pairs
+     *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+     *              failure as listed above.
+     *         "BUY_INTENT" - PendingIntent to start the purchase flow
+     * 
+     * The Pending intent should be launched with startIntentSenderForResult. When purchase flow
+     * has completed, the onActivityResult() will give a resultCode of OK or CANCELED.
+     * If the purchase is successful, the result data will contain the following key-value pairs
+     *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+     *              failure as listed above.
+     *         "INAPP_PURCHASE_DATA" - String in JSON format similar to
+     *              '{"orderId":"12999763169054705758.1371079406387615",
+     *                "packageName":"com.example.app",
+     *                "productId":"exampleSku",
+     *                "purchaseTime":1345678900000,
+     *                "purchaseToken" : "122333444455555",
+     *                "developerPayload":"example developer payload" }'
+     *         "INAPP_DATA_SIGNATURE" - String containing the signature of the purchase data that
+     *                                  was signed with the private key of the developer
+     *                                  TODO: change this to app-specific keys.
+     */
     @Override public android.os.Bundle getBuyIntent(int apiVersion, java.lang.String packageName, java.lang.String sku, java.lang.String type, java.lang.String developerPayload) throws android.os.RemoteException
     {
       return null;
     }
     /**
-         * Returns the current SKUs owned by the user of the type and package name specified along with
-         * purchase information and a signature of the data to be validated.
-         * This will return all SKUs that have been purchased in V3 and managed items purchased using
-         * V1 and V2 that have not been consumed.
-         * @param apiVersion billing API version that the app is using
-         * @param packageName package name of the calling app
-         * @param type the type of the in-app items being requested
-         *        ("inapp" for one-time purchases and "subs" for subscription).
-         * @param continuationToken to be set as null for the first call, if the number of owned
-         *        skus are too many, a continuationToken is returned in the response bundle.
-         *        This method can be called again with the continuation token to get the next set of
-         *        owned skus.
-         * @return Bundle containing the following key-value pairs
-         *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-         *              failure as listed above.
-         *         "INAPP_PURCHASE_ITEM_LIST" - StringArrayList containing the list of SKUs
-         *         "INAPP_PURCHASE_DATA_LIST" - StringArrayList containing the purchase information
-         *         "INAPP_DATA_SIGNATURE_LIST"- StringArrayList containing the signatures
-         *                                      of the purchase information
-         *         "INAPP_CONTINUATION_TOKEN" - String containing a continuation token for the
-         *                                      next set of in-app purchases. Only set if the
-         *                                      user has more owned skus than the current list.
-         */
+     * Returns the current SKUs owned by the user of the type and package name specified along with
+     * purchase information and a signature of the data to be validated.
+     * This will return all SKUs that have been purchased in V3 and managed items purchased using
+     * V1 and V2 that have not been consumed.
+     * @param apiVersion billing API version that the app is using
+     * @param packageName package name of the calling app
+     * @param type the type of the in-app items being requested
+     *        ("inapp" for one-time purchases and "subs" for subscription).
+     * @param continuationToken to be set as null for the first call, if the number of owned
+     *        skus are too many, a continuationToken is returned in the response bundle.
+     *        This method can be called again with the continuation token to get the next set of
+     *        owned skus.
+     * @return Bundle containing the following key-value pairs
+     *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+     *              failure as listed above.
+     *         "INAPP_PURCHASE_ITEM_LIST" - StringArrayList containing the list of SKUs
+     *         "INAPP_PURCHASE_DATA_LIST" - StringArrayList containing the purchase information
+     *         "INAPP_DATA_SIGNATURE_LIST"- StringArrayList containing the signatures
+     *                                      of the purchase information
+     *         "INAPP_CONTINUATION_TOKEN" - String containing a continuation token for the
+     *                                      next set of in-app purchases. Only set if the
+     *                                      user has more owned skus than the current list.
+     */
     @Override public android.os.Bundle getPurchases(int apiVersion, java.lang.String packageName, java.lang.String type, java.lang.String continuationToken) throws android.os.RemoteException
     {
       return null;
     }
     /**
-         * Consume the last purchase of the given SKU. This will result in this item being removed
-         * from all subsequent responses to getPurchases() and allow re-purchase of this item.
-         * @param apiVersion billing API version that the app is using
-         * @param packageName package name of the calling app
-         * @param purchaseToken token in the purchase information JSON that identifies the purchase
-         *        to be consumed
-         * @return 0 if consumption succeeded. Appropriate error values for failures.
-         */
+     * Consume the last purchase of the given SKU. This will result in this item being removed
+     * from all subsequent responses to getPurchases() and allow re-purchase of this item.
+     * @param apiVersion billing API version that the app is using
+     * @param packageName package name of the calling app
+     * @param purchaseToken token in the purchase information JSON that identifies the purchase
+     *        to be consumed
+     * @return 0 if consumption succeeded. Appropriate error values for failures.
+     */
     @Override public int consumePurchase(int apiVersion, java.lang.String packageName, java.lang.String purchaseToken) throws android.os.RemoteException
     {
       return 0;
@@ -147,7 +147,6 @@ public interface IInAppBillingService extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements com.android.vending.billing.IInAppBillingService
   {
-    private static final java.lang.String DESCRIPTOR = "com.android.vending.billing.IInAppBillingService";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -175,6 +174,9 @@ public interface IInAppBillingService extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -182,9 +184,11 @@ public interface IInAppBillingService extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_isBillingSupported:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -194,11 +198,10 @@ public interface IInAppBillingService extends android.os.IInterface
           int _result = this.isBillingSupported(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getSkuDetails:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -206,26 +209,14 @@ public interface IInAppBillingService extends android.os.IInterface
           java.lang.String _arg2;
           _arg2 = data.readString();
           android.os.Bundle _arg3;
-          if ((0!=data.readInt())) {
-            _arg3 = android.os.Bundle.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg3 = null;
-          }
+          _arg3 = _Parcel.readTypedObject(data, android.os.Bundle.CREATOR);
           android.os.Bundle _result = this.getSkuDetails(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_getBuyIntent:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -238,18 +229,11 @@ public interface IInAppBillingService extends android.os.IInterface
           _arg4 = data.readString();
           android.os.Bundle _result = this.getBuyIntent(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_getPurchases:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -260,18 +244,11 @@ public interface IInAppBillingService extends android.os.IInterface
           _arg3 = data.readString();
           android.os.Bundle _result = this.getPurchases(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_consumePurchase:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -281,13 +258,14 @@ public interface IInAppBillingService extends android.os.IInterface
           int _result = this.consumePurchase(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements com.android.vending.billing.IInAppBillingService
     {
@@ -305,14 +283,14 @@ public interface IInAppBillingService extends android.os.IInterface
         return DESCRIPTOR;
       }
       /**
-           * Checks support for the requested billing API version, package and in-app type.
-           * Minimum API version supported by this interface is 3.
-           * @param apiVersion the billing version which the app is using
-           * @param packageName the package name of the calling app
-           * @param type type of the in-app item being purchased "inapp" for one-time purchases
-           *        and "subs" for subscription.
-           * @return RESULT_OK(0) on success, corresponding result code on failures
-           */
+       * Checks support for the requested billing API version, package and in-app type.
+       * Minimum API version supported by this interface is 3.
+       * @param apiVersion the billing version which the app is using
+       * @param packageName the package name of the calling app
+       * @param type type of the in-app item being purchased "inapp" for one-time purchases
+       *        and "subs" for subscription.
+       * @return RESULT_OK(0) on success, corresponding result code on failures
+       */
       @Override public int isBillingSupported(int apiVersion, java.lang.String packageName, java.lang.String type) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -324,9 +302,6 @@ public interface IInAppBillingService extends android.os.IInterface
           _data.writeString(packageName);
           _data.writeString(type);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBillingSupported, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBillingSupported(apiVersion, packageName, type);
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -337,236 +312,6 @@ public interface IInAppBillingService extends android.os.IInterface
         return _result;
       }
       /**
-           * Provides details of a list of SKUs
-           * Given a list of SKUs of a valid type in the skusBundle, this returns a bundle
-           * with a list JSON strings containing the productId, price, title and description.
-           * This API can be called with a maximum of 20 SKUs.
-           * @param apiVersion billing API version that the Third-party is using
-           * @param packageName the package name of the calling app
-           * @param skusBundle bundle containing a StringArrayList of SKUs with key "ITEM_ID_LIST"
-           * @return Bundle containing the following key-value pairs
-           *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-           *              failure as listed above.
-           *         "DETAILS_LIST" with a StringArrayList containing purchase information
-           *              in JSON format similar to:
-           *              '{ "productId" : "exampleSku", "type" : "inapp", "price" : "$5.00",
-           *                 "title : "Example Title", "description" : "This is an example description" }'
-           */
-      @Override public android.os.Bundle getSkuDetails(int apiVersion, java.lang.String packageName, java.lang.String type, android.os.Bundle skusBundle) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        android.os.Bundle _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(apiVersion);
-          _data.writeString(packageName);
-          _data.writeString(type);
-          if ((skusBundle!=null)) {
-            _data.writeInt(1);
-            skusBundle.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getSkuDetails, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSkuDetails(apiVersion, packageName, type, skusBundle);
-          }
-          _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.os.Bundle.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      /**
-           * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
-           * the type, a unique purchase token and an optional developer payload.
-           * @param apiVersion billing API version that the app is using
-           * @param packageName package name of the calling app
-           * @param sku the SKU of the in-app item as published in the developer console
-           * @param type the type of the in-app item ("inapp" for one-time purchases
-           *        and "subs" for subscription).
-           * @param developerPayload optional argument to be sent back with the purchase information
-           * @return Bundle containing the following key-value pairs
-           *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-           *              failure as listed above.
-           *         "BUY_INTENT" - PendingIntent to start the purchase flow
-           *
-           * The Pending intent should be launched with startIntentSenderForResult. When purchase flow
-           * has completed, the onActivityResult() will give a resultCode of OK or CANCELED.
-           * If the purchase is successful, the result data will contain the following key-value pairs
-           *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-           *              failure as listed above.
-           *         "INAPP_PURCHASE_DATA" - String in JSON format similar to
-           *              '{"orderId":"12999763169054705758.1371079406387615",
-           *                "packageName":"com.example.app",
-           *                "productId":"exampleSku",
-           *                "purchaseTime":1345678900000,
-           *                "purchaseToken" : "122333444455555",
-           *                "developerPayload":"example developer payload" }'
-           *         "INAPP_DATA_SIGNATURE" - String containing the signature of the purchase data that
-           *                                  was signed with the private key of the developer
-           *                                  TODO: change this to app-specific keys.
-           */
-      @Override public android.os.Bundle getBuyIntent(int apiVersion, java.lang.String packageName, java.lang.String sku, java.lang.String type, java.lang.String developerPayload) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        android.os.Bundle _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(apiVersion);
-          _data.writeString(packageName);
-          _data.writeString(sku);
-          _data.writeString(type);
-          _data.writeString(developerPayload);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getBuyIntent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBuyIntent(apiVersion, packageName, sku, type, developerPayload);
-          }
-          _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.os.Bundle.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      /**
-           * Returns the current SKUs owned by the user of the type and package name specified along with
-           * purchase information and a signature of the data to be validated.
-           * This will return all SKUs that have been purchased in V3 and managed items purchased using
-           * V1 and V2 that have not been consumed.
-           * @param apiVersion billing API version that the app is using
-           * @param packageName package name of the calling app
-           * @param type the type of the in-app items being requested
-           *        ("inapp" for one-time purchases and "subs" for subscription).
-           * @param continuationToken to be set as null for the first call, if the number of owned
-           *        skus are too many, a continuationToken is returned in the response bundle.
-           *        This method can be called again with the continuation token to get the next set of
-           *        owned skus.
-           * @return Bundle containing the following key-value pairs
-           *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
-           *              failure as listed above.
-           *         "INAPP_PURCHASE_ITEM_LIST" - StringArrayList containing the list of SKUs
-           *         "INAPP_PURCHASE_DATA_LIST" - StringArrayList containing the purchase information
-           *         "INAPP_DATA_SIGNATURE_LIST"- StringArrayList containing the signatures
-           *                                      of the purchase information
-           *         "INAPP_CONTINUATION_TOKEN" - String containing a continuation token for the
-           *                                      next set of in-app purchases. Only set if the
-           *                                      user has more owned skus than the current list.
-           */
-      @Override public android.os.Bundle getPurchases(int apiVersion, java.lang.String packageName, java.lang.String type, java.lang.String continuationToken) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        android.os.Bundle _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(apiVersion);
-          _data.writeString(packageName);
-          _data.writeString(type);
-          _data.writeString(continuationToken);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getPurchases, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPurchases(apiVersion, packageName, type, continuationToken);
-          }
-          _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.os.Bundle.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      /**
-           * Consume the last purchase of the given SKU. This will result in this item being removed
-           * from all subsequent responses to getPurchases() and allow re-purchase of this item.
-           * @param apiVersion billing API version that the app is using
-           * @param packageName package name of the calling app
-           * @param purchaseToken token in the purchase information JSON that identifies the purchase
-           *        to be consumed
-           * @return 0 if consumption succeeded. Appropriate error values for failures.
-           */
-      @Override public int consumePurchase(int apiVersion, java.lang.String packageName, java.lang.String purchaseToken) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        int _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(apiVersion);
-          _data.writeString(packageName);
-          _data.writeString(purchaseToken);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_consumePurchase, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().consumePurchase(apiVersion, packageName, purchaseToken);
-          }
-          _reply.readException();
-          _result = _reply.readInt();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      public static com.android.vending.billing.IInAppBillingService sDefaultImpl;
-    }
-    static final int TRANSACTION_isBillingSupported = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-    static final int TRANSACTION_getSkuDetails = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
-    static final int TRANSACTION_getBuyIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-    static final int TRANSACTION_getPurchases = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    static final int TRANSACTION_consumePurchase = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-    public static boolean setDefaultImpl(com.android.vending.billing.IInAppBillingService impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static com.android.vending.billing.IInAppBillingService getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
-  }
-  /**
-       * Checks support for the requested billing API version, package and in-app type.
-       * Minimum API version supported by this interface is 3.
-       * @param apiVersion the billing version which the app is using
-       * @param packageName the package name of the calling app
-       * @param type type of the in-app item being purchased "inapp" for one-time purchases
-       *        and "subs" for subscription.
-       * @return RESULT_OK(0) on success, corresponding result code on failures
-       */
-  public int isBillingSupported(int apiVersion, java.lang.String packageName, java.lang.String type) throws android.os.RemoteException;
-  /**
        * Provides details of a list of SKUs
        * Given a list of SKUs of a valid type in the skusBundle, this returns a bundle
        * with a list JSON strings containing the productId, price, title and description.
@@ -582,8 +327,28 @@ public interface IInAppBillingService extends android.os.IInterface
        *              '{ "productId" : "exampleSku", "type" : "inapp", "price" : "$5.00",
        *                 "title : "Example Title", "description" : "This is an example description" }'
        */
-  public android.os.Bundle getSkuDetails(int apiVersion, java.lang.String packageName, java.lang.String type, android.os.Bundle skusBundle) throws android.os.RemoteException;
-  /**
+      @Override public android.os.Bundle getSkuDetails(int apiVersion, java.lang.String packageName, java.lang.String type, android.os.Bundle skusBundle) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        android.os.Bundle _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(apiVersion);
+          _data.writeString(packageName);
+          _data.writeString(type);
+          _Parcel.writeTypedObject(_data, skusBundle, 0);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getSkuDetails, _data, _reply, 0);
+          _reply.readException();
+          _result = _Parcel.readTypedObject(_reply, android.os.Bundle.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      /**
        * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
        * the type, a unique purchase token and an optional developer payload.
        * @param apiVersion billing API version that the app is using
@@ -596,7 +361,7 @@ public interface IInAppBillingService extends android.os.IInterface
        *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
        *              failure as listed above.
        *         "BUY_INTENT" - PendingIntent to start the purchase flow
-       *
+       * 
        * The Pending intent should be launched with startIntentSenderForResult. When purchase flow
        * has completed, the onActivityResult() will give a resultCode of OK or CANCELED.
        * If the purchase is successful, the result data will contain the following key-value pairs
@@ -613,8 +378,29 @@ public interface IInAppBillingService extends android.os.IInterface
        *                                  was signed with the private key of the developer
        *                                  TODO: change this to app-specific keys.
        */
-  public android.os.Bundle getBuyIntent(int apiVersion, java.lang.String packageName, java.lang.String sku, java.lang.String type, java.lang.String developerPayload) throws android.os.RemoteException;
-  /**
+      @Override public android.os.Bundle getBuyIntent(int apiVersion, java.lang.String packageName, java.lang.String sku, java.lang.String type, java.lang.String developerPayload) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        android.os.Bundle _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(apiVersion);
+          _data.writeString(packageName);
+          _data.writeString(sku);
+          _data.writeString(type);
+          _data.writeString(developerPayload);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getBuyIntent, _data, _reply, 0);
+          _reply.readException();
+          _result = _Parcel.readTypedObject(_reply, android.os.Bundle.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      /**
        * Returns the current SKUs owned by the user of the type and package name specified along with
        * purchase information and a signature of the data to be validated.
        * This will return all SKUs that have been purchased in V3 and managed items purchased using
@@ -638,8 +424,28 @@ public interface IInAppBillingService extends android.os.IInterface
        *                                      next set of in-app purchases. Only set if the
        *                                      user has more owned skus than the current list.
        */
-  public android.os.Bundle getPurchases(int apiVersion, java.lang.String packageName, java.lang.String type, java.lang.String continuationToken) throws android.os.RemoteException;
-  /**
+      @Override public android.os.Bundle getPurchases(int apiVersion, java.lang.String packageName, java.lang.String type, java.lang.String continuationToken) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        android.os.Bundle _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(apiVersion);
+          _data.writeString(packageName);
+          _data.writeString(type);
+          _data.writeString(continuationToken);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPurchases, _data, _reply, 0);
+          _reply.readException();
+          _result = _Parcel.readTypedObject(_reply, android.os.Bundle.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      /**
        * Consume the last purchase of the given SKU. This will result in this item being removed
        * from all subsequent responses to getPurchases() and allow re-purchase of this item.
        * @param apiVersion billing API version that the app is using
@@ -648,5 +454,146 @@ public interface IInAppBillingService extends android.os.IInterface
        *        to be consumed
        * @return 0 if consumption succeeded. Appropriate error values for failures.
        */
+      @Override public int consumePurchase(int apiVersion, java.lang.String packageName, java.lang.String purchaseToken) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(apiVersion);
+          _data.writeString(packageName);
+          _data.writeString(purchaseToken);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_consumePurchase, _data, _reply, 0);
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+    }
+    static final int TRANSACTION_isBillingSupported = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+    static final int TRANSACTION_getSkuDetails = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    static final int TRANSACTION_getBuyIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
+    static final int TRANSACTION_getPurchases = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
+    static final int TRANSACTION_consumePurchase = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+  }
+  public static final java.lang.String DESCRIPTOR = "com.android.vending.billing.IInAppBillingService";
+  /**
+   * Checks support for the requested billing API version, package and in-app type.
+   * Minimum API version supported by this interface is 3.
+   * @param apiVersion the billing version which the app is using
+   * @param packageName the package name of the calling app
+   * @param type type of the in-app item being purchased "inapp" for one-time purchases
+   *        and "subs" for subscription.
+   * @return RESULT_OK(0) on success, corresponding result code on failures
+   */
+  public int isBillingSupported(int apiVersion, java.lang.String packageName, java.lang.String type) throws android.os.RemoteException;
+  /**
+   * Provides details of a list of SKUs
+   * Given a list of SKUs of a valid type in the skusBundle, this returns a bundle
+   * with a list JSON strings containing the productId, price, title and description.
+   * This API can be called with a maximum of 20 SKUs.
+   * @param apiVersion billing API version that the Third-party is using
+   * @param packageName the package name of the calling app
+   * @param skusBundle bundle containing a StringArrayList of SKUs with key "ITEM_ID_LIST"
+   * @return Bundle containing the following key-value pairs
+   *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+   *              failure as listed above.
+   *         "DETAILS_LIST" with a StringArrayList containing purchase information
+   *              in JSON format similar to:
+   *              '{ "productId" : "exampleSku", "type" : "inapp", "price" : "$5.00",
+   *                 "title : "Example Title", "description" : "This is an example description" }'
+   */
+  public android.os.Bundle getSkuDetails(int apiVersion, java.lang.String packageName, java.lang.String type, android.os.Bundle skusBundle) throws android.os.RemoteException;
+  /**
+   * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
+   * the type, a unique purchase token and an optional developer payload.
+   * @param apiVersion billing API version that the app is using
+   * @param packageName package name of the calling app
+   * @param sku the SKU of the in-app item as published in the developer console
+   * @param type the type of the in-app item ("inapp" for one-time purchases
+   *        and "subs" for subscription).
+   * @param developerPayload optional argument to be sent back with the purchase information
+   * @return Bundle containing the following key-value pairs
+   *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+   *              failure as listed above.
+   *         "BUY_INTENT" - PendingIntent to start the purchase flow
+   * 
+   * The Pending intent should be launched with startIntentSenderForResult. When purchase flow
+   * has completed, the onActivityResult() will give a resultCode of OK or CANCELED.
+   * If the purchase is successful, the result data will contain the following key-value pairs
+   *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+   *              failure as listed above.
+   *         "INAPP_PURCHASE_DATA" - String in JSON format similar to
+   *              '{"orderId":"12999763169054705758.1371079406387615",
+   *                "packageName":"com.example.app",
+   *                "productId":"exampleSku",
+   *                "purchaseTime":1345678900000,
+   *                "purchaseToken" : "122333444455555",
+   *                "developerPayload":"example developer payload" }'
+   *         "INAPP_DATA_SIGNATURE" - String containing the signature of the purchase data that
+   *                                  was signed with the private key of the developer
+   *                                  TODO: change this to app-specific keys.
+   */
+  public android.os.Bundle getBuyIntent(int apiVersion, java.lang.String packageName, java.lang.String sku, java.lang.String type, java.lang.String developerPayload) throws android.os.RemoteException;
+  /**
+   * Returns the current SKUs owned by the user of the type and package name specified along with
+   * purchase information and a signature of the data to be validated.
+   * This will return all SKUs that have been purchased in V3 and managed items purchased using
+   * V1 and V2 that have not been consumed.
+   * @param apiVersion billing API version that the app is using
+   * @param packageName package name of the calling app
+   * @param type the type of the in-app items being requested
+   *        ("inapp" for one-time purchases and "subs" for subscription).
+   * @param continuationToken to be set as null for the first call, if the number of owned
+   *        skus are too many, a continuationToken is returned in the response bundle.
+   *        This method can be called again with the continuation token to get the next set of
+   *        owned skus.
+   * @return Bundle containing the following key-value pairs
+   *         "RESPONSE_CODE" with int value, RESULT_OK(0) if success, other response codes on
+   *              failure as listed above.
+   *         "INAPP_PURCHASE_ITEM_LIST" - StringArrayList containing the list of SKUs
+   *         "INAPP_PURCHASE_DATA_LIST" - StringArrayList containing the purchase information
+   *         "INAPP_DATA_SIGNATURE_LIST"- StringArrayList containing the signatures
+   *                                      of the purchase information
+   *         "INAPP_CONTINUATION_TOKEN" - String containing a continuation token for the
+   *                                      next set of in-app purchases. Only set if the
+   *                                      user has more owned skus than the current list.
+   */
+  public android.os.Bundle getPurchases(int apiVersion, java.lang.String packageName, java.lang.String type, java.lang.String continuationToken) throws android.os.RemoteException;
+  /**
+   * Consume the last purchase of the given SKU. This will result in this item being removed
+   * from all subsequent responses to getPurchases() and allow re-purchase of this item.
+   * @param apiVersion billing API version that the app is using
+   * @param packageName package name of the calling app
+   * @param purchaseToken token in the purchase information JSON that identifies the purchase
+   *        to be consumed
+   * @return 0 if consumption succeeded. Appropriate error values for failures.
+   */
   public int consumePurchase(int apiVersion, java.lang.String packageName, java.lang.String purchaseToken) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+  }
 }

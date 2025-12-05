@@ -14,54 +14,58 @@ public interface IOpenVPNAPIService extends android.os.IInterface
     @Override public void startProfile(java.lang.String profileUUID) throws android.os.RemoteException
     {
     }
-    /** Use a profile with all certificates etc. embedded,
-    	 * old version which does not return the UUID of the addded profile, see
-    	 * below for a version that return the UUID on add */
+    /**
+     * Use a profile with all certificates etc. embedded,
+     * old version which does not return the UUID of the addded profile, see
+     * below for a version that return the UUID on add
+     */
     @Override public boolean addVPNProfile(java.lang.String name, java.lang.String config) throws android.os.RemoteException
     {
       return false;
     }
-    /** start a profile using a config as inline string. Make sure that all needed data is inlined,
-    	 * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
-    	 * See the OpenVPN manual page for more on inlining files */
+    /**
+     * start a profile using a config as inline string. Make sure that all needed data is inlined,
+     * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
+     * See the OpenVPN manual page for more on inlining files
+     */
     @Override public void startVPN(java.lang.String inlineconfig) throws android.os.RemoteException
     {
     }
-    /** This permission framework is used  to avoid confused deputy style attack to the VPN
-    	 * calling this will give null if the app is allowed to use the external API and an Intent
-    	 * that can be launched to request permissions otherwise */
+    /**
+     * This permission framework is used  to avoid confused deputy style attack to the VPN
+     * calling this will give null if the app is allowed to use the external API and an Intent
+     * that can be launched to request permissions otherwise
+     */
     @Override public android.content.Intent prepare(java.lang.String packagename) throws android.os.RemoteException
     {
       return null;
     }
-    /** Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
-    	 * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
-    	 * to let OpenVPN for Android request the permission */
+    /**
+     * Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
+     * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
+     * to let OpenVPN for Android request the permission
+     */
     @Override public android.content.Intent prepareVPNService() throws android.os.RemoteException
     {
       return null;
     }
-    /* Disconnect the VPN */
+    /** Disconnect the VPN */
     @Override public void disconnect() throws android.os.RemoteException
     {
     }
-    /* Pause the VPN (same as using the pause feature in the notifcation bar) */
+    /** Pause the VPN (same as using the pause feature in the notifcation bar) */
     @Override public void pause() throws android.os.RemoteException
     {
     }
-    /* Resume the VPN (same as using the pause feature in the notifcation bar) */
+    /** Resume the VPN (same as using the pause feature in the notifcation bar) */
     @Override public void resume() throws android.os.RemoteException
     {
     }
-    /**
-          * Registers to receive OpenVPN Status Updates
-          */
+    /** Registers to receive OpenVPN Status Updates */
     @Override public void registerStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException
     {
     }
-    /**
-         * Remove a previously registered callback interface.
-         */
+    /** Remove a previously registered callback interface. */
     @Override public void unregisterStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException
     {
     }
@@ -69,10 +73,12 @@ public interface IOpenVPNAPIService extends android.os.IInterface
     @Override public void removeProfile(java.lang.String profileUUID) throws android.os.RemoteException
     {
     }
-    /** Request a socket to be protected as a VPN socket would be. Useful for creating
-    	  * a helper socket for an app controlling OpenVPN
-    	  * Before calling this function you should make sure OpenVPN for Android may actually
-    	  * this function by checking if prepareVPNService returns null; */
+    /**
+     * Request a socket to be protected as a VPN socket would be. Useful for creating
+     * a helper socket for an app controlling OpenVPN
+     * Before calling this function you should make sure OpenVPN for Android may actually
+     * this function by checking if prepareVPNService returns null;
+     */
     @Override public boolean protectSocket(android.os.ParcelFileDescriptor fd) throws android.os.RemoteException
     {
       return false;
@@ -90,7 +96,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements de.blinkt.openvpn.api.IOpenVPNAPIService
   {
-    private static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.IOpenVPNAPIService";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -118,6 +123,9 @@ public interface IOpenVPNAPIService extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -125,26 +133,26 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_getProfiles:
         {
-          data.enforceInterface(descriptor);
           java.util.List<de.blinkt.openvpn.api.APIVpnProfile> _result = this.getProfiles();
           reply.writeNoException();
-          reply.writeTypedList(_result);
-          return true;
+          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_startProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.startProfile(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_addVPNProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -152,113 +160,85 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           boolean _result = this.addVPNProfile(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_startVPN:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.startVPN(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_prepare:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           android.content.Intent _result = this.prepare(_arg0);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_prepareVPNService:
         {
-          data.enforceInterface(descriptor);
           android.content.Intent _result = this.prepareVPNService();
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_disconnect:
         {
-          data.enforceInterface(descriptor);
           this.disconnect();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_pause:
         {
-          data.enforceInterface(descriptor);
           this.pause();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_resume:
         {
-          data.enforceInterface(descriptor);
           this.resume();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_registerStatusCallback:
         {
-          data.enforceInterface(descriptor);
           de.blinkt.openvpn.api.IOpenVPNStatusCallback _arg0;
           _arg0 = de.blinkt.openvpn.api.IOpenVPNStatusCallback.Stub.asInterface(data.readStrongBinder());
           this.registerStatusCallback(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_unregisterStatusCallback:
         {
-          data.enforceInterface(descriptor);
           de.blinkt.openvpn.api.IOpenVPNStatusCallback _arg0;
           _arg0 = de.blinkt.openvpn.api.IOpenVPNStatusCallback.Stub.asInterface(data.readStrongBinder());
           this.unregisterStatusCallback(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_removeProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.removeProfile(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_protectSocket:
         {
-          data.enforceInterface(descriptor);
           android.os.ParcelFileDescriptor _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.os.ParcelFileDescriptor.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, android.os.ParcelFileDescriptor.CREATOR);
           boolean _result = this.protectSocket(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_addNewVPNProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
@@ -267,20 +247,15 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _arg2 = data.readString();
           de.blinkt.openvpn.api.APIVpnProfile _result = this.addNewVPNProfile(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements de.blinkt.openvpn.api.IOpenVPNAPIService
     {
@@ -305,9 +280,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProfiles, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getProfiles();
-          }
           _reply.readException();
           _result = _reply.createTypedArrayList(de.blinkt.openvpn.api.APIVpnProfile.CREATOR);
         }
@@ -325,10 +297,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(profileUUID);
           boolean _status = mRemote.transact(Stub.TRANSACTION_startProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().startProfile(profileUUID);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -336,9 +304,11 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /** Use a profile with all certificates etc. embedded,
-      	 * old version which does not return the UUID of the addded profile, see
-      	 * below for a version that return the UUID on add */
+      /**
+       * Use a profile with all certificates etc. embedded,
+       * old version which does not return the UUID of the addded profile, see
+       * below for a version that return the UUID on add
+       */
       @Override public boolean addVPNProfile(java.lang.String name, java.lang.String config) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -349,9 +319,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeString(name);
           _data.writeString(config);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addVPNProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().addVPNProfile(name, config);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -361,9 +328,11 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         }
         return _result;
       }
-      /** start a profile using a config as inline string. Make sure that all needed data is inlined,
-      	 * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
-      	 * See the OpenVPN manual page for more on inlining files */
+      /**
+       * start a profile using a config as inline string. Make sure that all needed data is inlined,
+       * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
+       * See the OpenVPN manual page for more on inlining files
+       */
       @Override public void startVPN(java.lang.String inlineconfig) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -372,10 +341,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(inlineconfig);
           boolean _status = mRemote.transact(Stub.TRANSACTION_startVPN, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().startVPN(inlineconfig);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -383,9 +348,11 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /** This permission framework is used  to avoid confused deputy style attack to the VPN
-      	 * calling this will give null if the app is allowed to use the external API and an Intent
-      	 * that can be launched to request permissions otherwise */
+      /**
+       * This permission framework is used  to avoid confused deputy style attack to the VPN
+       * calling this will give null if the app is allowed to use the external API and an Intent
+       * that can be launched to request permissions otherwise
+       */
       @Override public android.content.Intent prepare(java.lang.String packagename) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -395,16 +362,8 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packagename);
           boolean _status = mRemote.transact(Stub.TRANSACTION_prepare, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().prepare(packagename);
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.content.Intent.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, android.content.Intent.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -412,9 +371,11 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         }
         return _result;
       }
-      /** Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
-      	 * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
-      	 * to let OpenVPN for Android request the permission */
+      /**
+       * Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
+       * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
+       * to let OpenVPN for Android request the permission
+       */
       @Override public android.content.Intent prepareVPNService() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -423,16 +384,8 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_prepareVPNService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().prepareVPNService();
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.content.Intent.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, android.content.Intent.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -440,7 +393,7 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         }
         return _result;
       }
-      /* Disconnect the VPN */
+      /** Disconnect the VPN */
       @Override public void disconnect() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -448,10 +401,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_disconnect, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().disconnect();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -459,7 +408,7 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /* Pause the VPN (same as using the pause feature in the notifcation bar) */
+      /** Pause the VPN (same as using the pause feature in the notifcation bar) */
       @Override public void pause() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -467,10 +416,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_pause, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().pause();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -478,7 +423,7 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /* Resume the VPN (same as using the pause feature in the notifcation bar) */
+      /** Resume the VPN (same as using the pause feature in the notifcation bar) */
       @Override public void resume() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -486,10 +431,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_resume, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().resume();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -497,21 +438,15 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /**
-            * Registers to receive OpenVPN Status Updates
-            */
+      /** Registers to receive OpenVPN Status Updates */
       @Override public void registerStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
+          _data.writeStrongInterface(cb);
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerStatusCallback, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerStatusCallback(cb);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -519,21 +454,15 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /**
-           * Remove a previously registered callback interface.
-           */
+      /** Remove a previously registered callback interface. */
       @Override public void unregisterStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
+          _data.writeStrongInterface(cb);
           boolean _status = mRemote.transact(Stub.TRANSACTION_unregisterStatusCallback, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unregisterStatusCallback(cb);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -550,10 +479,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(profileUUID);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().removeProfile(profileUUID);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -561,10 +486,12 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.recycle();
         }
       }
-      /** Request a socket to be protected as a VPN socket would be. Useful for creating
-      	  * a helper socket for an app controlling OpenVPN
-      	  * Before calling this function you should make sure OpenVPN for Android may actually
-      	  * this function by checking if prepareVPNService returns null; */
+      /**
+       * Request a socket to be protected as a VPN socket would be. Useful for creating
+       * a helper socket for an app controlling OpenVPN
+       * Before calling this function you should make sure OpenVPN for Android may actually
+       * this function by checking if prepareVPNService returns null;
+       */
       @Override public boolean protectSocket(android.os.ParcelFileDescriptor fd) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -572,17 +499,8 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((fd!=null)) {
-            _data.writeInt(1);
-            fd.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, fd, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_protectSocket, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().protectSocket(fd);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -604,16 +522,8 @@ public interface IOpenVPNAPIService extends android.os.IInterface
           _data.writeInt(((userEditable)?(1):(0)));
           _data.writeString(config);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addNewVPNProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().addNewVPNProfile(name, userEditable, config);
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = de.blinkt.openvpn.api.APIVpnProfile.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, de.blinkt.openvpn.api.APIVpnProfile.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -621,7 +531,6 @@ public interface IOpenVPNAPIService extends android.os.IInterface
         }
         return _result;
       }
-      public static de.blinkt.openvpn.api.IOpenVPNAPIService sDefaultImpl;
     }
     static final int TRANSACTION_getProfiles = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_startProfile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -637,62 +546,88 @@ public interface IOpenVPNAPIService extends android.os.IInterface
     static final int TRANSACTION_removeProfile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
     static final int TRANSACTION_protectSocket = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
     static final int TRANSACTION_addNewVPNProfile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
-    public static boolean setDefaultImpl(de.blinkt.openvpn.api.IOpenVPNAPIService impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static de.blinkt.openvpn.api.IOpenVPNAPIService getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.IOpenVPNAPIService";
   public java.util.List<de.blinkt.openvpn.api.APIVpnProfile> getProfiles() throws android.os.RemoteException;
   public void startProfile(java.lang.String profileUUID) throws android.os.RemoteException;
-  /** Use a profile with all certificates etc. embedded,
-  	 * old version which does not return the UUID of the addded profile, see
-  	 * below for a version that return the UUID on add */
+  /**
+   * Use a profile with all certificates etc. embedded,
+   * old version which does not return the UUID of the addded profile, see
+   * below for a version that return the UUID on add
+   */
   public boolean addVPNProfile(java.lang.String name, java.lang.String config) throws android.os.RemoteException;
-  /** start a profile using a config as inline string. Make sure that all needed data is inlined,
-  	 * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
-  	 * See the OpenVPN manual page for more on inlining files */
+  /**
+   * start a profile using a config as inline string. Make sure that all needed data is inlined,
+   * e.g., using <ca>...</ca> or <auth-user-pass>...</auth-user-pass>
+   * See the OpenVPN manual page for more on inlining files
+   */
   public void startVPN(java.lang.String inlineconfig) throws android.os.RemoteException;
-  /** This permission framework is used  to avoid confused deputy style attack to the VPN
-  	 * calling this will give null if the app is allowed to use the external API and an Intent
-  	 * that can be launched to request permissions otherwise */
+  /**
+   * This permission framework is used  to avoid confused deputy style attack to the VPN
+   * calling this will give null if the app is allowed to use the external API and an Intent
+   * that can be launched to request permissions otherwise
+   */
   public android.content.Intent prepare(java.lang.String packagename) throws android.os.RemoteException;
-  /** Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
-  	 * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
-  	 * to let OpenVPN for Android request the permission */
+  /**
+   * Used to trigger to the Android VPN permission dialog (VPNService.prepare()) in advance,
+   * if this return null OpenVPN for ANdroid already has the permissions otherwise you can start the returned Intent
+   * to let OpenVPN for Android request the permission
+   */
   public android.content.Intent prepareVPNService() throws android.os.RemoteException;
-  /* Disconnect the VPN */
+  /** Disconnect the VPN */
   public void disconnect() throws android.os.RemoteException;
-  /* Pause the VPN (same as using the pause feature in the notifcation bar) */
+  /** Pause the VPN (same as using the pause feature in the notifcation bar) */
   public void pause() throws android.os.RemoteException;
-  /* Resume the VPN (same as using the pause feature in the notifcation bar) */
+  /** Resume the VPN (same as using the pause feature in the notifcation bar) */
   public void resume() throws android.os.RemoteException;
-  /**
-        * Registers to receive OpenVPN Status Updates
-        */
+  /** Registers to receive OpenVPN Status Updates */
   public void registerStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException;
-  /**
-       * Remove a previously registered callback interface.
-       */
+  /** Remove a previously registered callback interface. */
   public void unregisterStatusCallback(de.blinkt.openvpn.api.IOpenVPNStatusCallback cb) throws android.os.RemoteException;
   /** Remove a profile by UUID */
   public void removeProfile(java.lang.String profileUUID) throws android.os.RemoteException;
-  /** Request a socket to be protected as a VPN socket would be. Useful for creating
-  	  * a helper socket for an app controlling OpenVPN
-  	  * Before calling this function you should make sure OpenVPN for Android may actually
-  	  * this function by checking if prepareVPNService returns null; */
+  /**
+   * Request a socket to be protected as a VPN socket would be. Useful for creating
+   * a helper socket for an app controlling OpenVPN
+   * Before calling this function you should make sure OpenVPN for Android may actually
+   * this function by checking if prepareVPNService returns null;
+   */
   public boolean protectSocket(android.os.ParcelFileDescriptor fd) throws android.os.RemoteException;
   /** Use a profile with all certificates etc. embedded */
   public de.blinkt.openvpn.api.APIVpnProfile addNewVPNProfile(java.lang.String name, boolean userEditable, java.lang.String config) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedList(
+        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
+      if (value == null) {
+        parcel.writeInt(-1);
+      } else {
+        int N = value.size();
+        int i = 0;
+        parcel.writeInt(N);
+        while (i < N) {
+    writeTypedObject(parcel, value.get(i), parcelableFlags);
+          i++;
+        }
+      }
+    }
+  }
 }

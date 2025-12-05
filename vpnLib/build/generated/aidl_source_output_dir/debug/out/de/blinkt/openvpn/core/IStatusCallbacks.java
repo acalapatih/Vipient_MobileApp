@@ -7,9 +7,7 @@ public interface IStatusCallbacks extends android.os.IInterface
   /** Default implementation for IStatusCallbacks. */
   public static class Default implements de.blinkt.openvpn.core.IStatusCallbacks
   {
-    /**
-         * Called when the service has a new status for you.
-         */
+    /** Called when the service has a new status for you. */
     @Override public void newLogItem(de.blinkt.openvpn.core.LogItem item) throws android.os.RemoteException
     {
     }
@@ -30,7 +28,6 @@ public interface IStatusCallbacks extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements de.blinkt.openvpn.core.IStatusCallbacks
   {
-    private static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.core.IStatusCallbacks";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -58,6 +55,9 @@ public interface IStatusCallbacks extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -65,22 +65,18 @@ public interface IStatusCallbacks extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_newLogItem:
         {
-          data.enforceInterface(descriptor);
           de.blinkt.openvpn.core.LogItem _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = de.blinkt.openvpn.core.LogItem.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, de.blinkt.openvpn.core.LogItem.CREATOR);
           this.newLogItem(_arg0);
-          return true;
+          break;
         }
         case TRANSACTION_updateStateString:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -88,45 +84,34 @@ public interface IStatusCallbacks extends android.os.IInterface
           int _arg2;
           _arg2 = data.readInt();
           de.blinkt.openvpn.core.ConnectionStatus _arg3;
-          if ((0!=data.readInt())) {
-            _arg3 = de.blinkt.openvpn.core.ConnectionStatus.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg3 = null;
-          }
+          _arg3 = _Parcel.readTypedObject(data, de.blinkt.openvpn.core.ConnectionStatus.CREATOR);
           android.content.Intent _arg4;
-          if ((0!=data.readInt())) {
-            _arg4 = android.content.Intent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg4 = null;
-          }
+          _arg4 = _Parcel.readTypedObject(data, android.content.Intent.CREATOR);
           this.updateStateString(_arg0, _arg1, _arg2, _arg3, _arg4);
-          return true;
+          break;
         }
         case TRANSACTION_updateByteCount:
         {
-          data.enforceInterface(descriptor);
           long _arg0;
           _arg0 = data.readLong();
           long _arg1;
           _arg1 = data.readLong();
           this.updateByteCount(_arg0, _arg1);
-          return true;
+          break;
         }
         case TRANSACTION_connectedVPN:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.connectedVPN(_arg0);
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements de.blinkt.openvpn.core.IStatusCallbacks
     {
@@ -143,26 +128,14 @@ public interface IStatusCallbacks extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      /**
-           * Called when the service has a new status for you.
-           */
+      /** Called when the service has a new status for you. */
       @Override public void newLogItem(de.blinkt.openvpn.core.LogItem item) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((item!=null)) {
-            _data.writeInt(1);
-            item.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, item, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_newLogItem, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().newLogItem(item);
-            return;
-          }
         }
         finally {
           _data.recycle();
@@ -176,25 +149,9 @@ public interface IStatusCallbacks extends android.os.IInterface
           _data.writeString(state);
           _data.writeString(msg);
           _data.writeInt(resid);
-          if ((level!=null)) {
-            _data.writeInt(1);
-            level.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          if ((intent!=null)) {
-            _data.writeInt(1);
-            intent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, level, 0);
+          _Parcel.writeTypedObject(_data, intent, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_updateStateString, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().updateStateString(state, msg, resid, level, intent);
-            return;
-          }
         }
         finally {
           _data.recycle();
@@ -208,10 +165,6 @@ public interface IStatusCallbacks extends android.os.IInterface
           _data.writeLong(inBytes);
           _data.writeLong(outBytes);
           boolean _status = mRemote.transact(Stub.TRANSACTION_updateByteCount, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().updateByteCount(inBytes, outBytes);
-            return;
-          }
         }
         finally {
           _data.recycle();
@@ -224,43 +177,42 @@ public interface IStatusCallbacks extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(uuid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_connectedVPN, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().connectedVPN(uuid);
-            return;
-          }
         }
         finally {
           _data.recycle();
         }
       }
-      public static de.blinkt.openvpn.core.IStatusCallbacks sDefaultImpl;
     }
     static final int TRANSACTION_newLogItem = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_updateStateString = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_updateByteCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_connectedVPN = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    public static boolean setDefaultImpl(de.blinkt.openvpn.core.IStatusCallbacks impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static de.blinkt.openvpn.core.IStatusCallbacks getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
-  /**
-       * Called when the service has a new status for you.
-       */
+  public static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.core.IStatusCallbacks";
+  /** Called when the service has a new status for you. */
   public void newLogItem(de.blinkt.openvpn.core.LogItem item) throws android.os.RemoteException;
   public void updateStateString(java.lang.String state, java.lang.String msg, int resid, de.blinkt.openvpn.core.ConnectionStatus level, android.content.Intent intent) throws android.os.RemoteException;
   public void updateByteCount(long inBytes, long outBytes) throws android.os.RemoteException;
   public void connectedVPN(java.lang.String uuid) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+  }
 }

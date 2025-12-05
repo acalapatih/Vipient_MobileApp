@@ -2,9 +2,7 @@
  * This file is auto-generated.  DO NOT MODIFY.
  */
 package de.blinkt.openvpn.core;
-/**
- * Created by arne on 15.11.16.
- */
+/** Created by arne on 15.11.16. */
 public interface IOpenVPNServiceInternal extends android.os.IInterface
 {
   /** Default implementation for IOpenVPNServiceInternal. */
@@ -18,9 +16,9 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
     {
     }
     /**
-         * @param replaceConnection True if the VPN is connected by a new connection.
-         * @return true if there was a process that has been send a stop signal
-         */
+     * @param replaceConnection True if the VPN is connected by a new connection.
+     * @return true if there was a process that has been send a stop signal
+     */
     @Override public boolean stopVPN(boolean replaceConnection) throws android.os.RemoteException
     {
       return false;
@@ -43,7 +41,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements de.blinkt.openvpn.core.IOpenVPNServiceInternal
   {
-    private static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.core.IOpenVPNServiceInternal";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -71,6 +68,9 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -78,68 +78,66 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_protect:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           boolean _result = this.protect(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_userPause:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.userPause(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_stopVPN:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           boolean _result = this.stopVPN(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_addAllowedExternalApp:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.addAllowedExternalApp(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_isAllowedExternalApp:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isAllowedExternalApp(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_challengeResponse:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.challengeResponse(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements de.blinkt.openvpn.core.IOpenVPNServiceInternal
     {
@@ -165,9 +163,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(fd);
           boolean _status = mRemote.transact(Stub.TRANSACTION_protect, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().protect(fd);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -185,10 +180,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((b)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_userPause, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().userPause(b);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -197,9 +188,9 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
         }
       }
       /**
-           * @param replaceConnection True if the VPN is connected by a new connection.
-           * @return true if there was a process that has been send a stop signal
-           */
+       * @param replaceConnection True if the VPN is connected by a new connection.
+       * @return true if there was a process that has been send a stop signal
+       */
       @Override public boolean stopVPN(boolean replaceConnection) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -209,9 +200,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((replaceConnection)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_stopVPN, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().stopVPN(replaceConnection);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -229,10 +217,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packagename);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addAllowedExternalApp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addAllowedExternalApp(packagename);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -249,9 +233,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packagename);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isAllowedExternalApp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isAllowedExternalApp(packagename);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -269,10 +250,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(repsonse);
           boolean _status = mRemote.transact(Stub.TRANSACTION_challengeResponse, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().challengeResponse(repsonse);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -280,7 +257,6 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static de.blinkt.openvpn.core.IOpenVPNServiceInternal sDefaultImpl;
     }
     static final int TRANSACTION_protect = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_userPause = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -288,29 +264,14 @@ public interface IOpenVPNServiceInternal extends android.os.IInterface
     static final int TRANSACTION_addAllowedExternalApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
     static final int TRANSACTION_isAllowedExternalApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
     static final int TRANSACTION_challengeResponse = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
-    public static boolean setDefaultImpl(de.blinkt.openvpn.core.IOpenVPNServiceInternal impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static de.blinkt.openvpn.core.IOpenVPNServiceInternal getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.core.IOpenVPNServiceInternal";
   public boolean protect(int fd) throws android.os.RemoteException;
   public void userPause(boolean b) throws android.os.RemoteException;
   /**
-       * @param replaceConnection True if the VPN is connected by a new connection.
-       * @return true if there was a process that has been send a stop signal
-       */
+   * @param replaceConnection True if the VPN is connected by a new connection.
+   * @return true if there was a process that has been send a stop signal
+   */
   public boolean stopVPN(boolean replaceConnection) throws android.os.RemoteException;
   public void addAllowedExternalApp(java.lang.String packagename) throws android.os.RemoteException;
   public boolean isAllowedExternalApp(java.lang.String packagename) throws android.os.RemoteException;

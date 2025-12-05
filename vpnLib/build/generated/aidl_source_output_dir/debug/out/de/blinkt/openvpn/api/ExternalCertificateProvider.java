@@ -2,7 +2,7 @@
  * This file is auto-generated.  DO NOT MODIFY.
  */
 package de.blinkt.openvpn.api;
-/*
+/**
  * This is very simple interface that is specialised to have only the minimal set of crypto
  * operation that are needed for OpenVPN to authenticate with an external certificate
  */
@@ -12,37 +12,36 @@ public interface ExternalCertificateProvider extends android.os.IInterface
   public static class Default implements de.blinkt.openvpn.api.ExternalCertificateProvider
   {
     /**
-         * Requests signing the data with RSA/ECB/PKCS1PADDING
-         * for RSA certficate and with NONEwithECDSA for EC certificates
-         * @parm alias the parameter that
-         */
+     * Requests signing the data with RSA/ECB/PKCS1PADDING
+     * for RSA certficate and with NONEwithECDSA for EC certificates
+     * @parm alias the parameter that
+     */
     @Override public byte[] getSignedData(java.lang.String alias, byte[] data) throws android.os.RemoteException
     {
       return null;
     }
     /**
-         * Requests the certificate chain for the selected alias
-         * The first certifcate returned is assumed to be
-         * the user certificate
-         */
+     * Requests the certificate chain for the selected alias
+     * The first certifcate returned is assumed to be
+     * the user certificate
+     */
     @Override public byte[] getCertificateChain(java.lang.String alias) throws android.os.RemoteException
     {
       return null;
     }
     /**
-         * This function is called for the app to get additional meta information from the
-         * external provider and will be called with the stored alias in the app
-         *
-         * For external app provider that do not provide an activity to configure them, this
-         * is used to get the alias that should be used.
-         * The format is the same as the activity should return, i.e.
-         *
-         * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
-         * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
-         *
-         * as the keys for the bundle.
-         *
-         */
+     * This function is called for the app to get additional meta information from the
+     * external provider and will be called with the stored alias in the app
+     * 
+     * For external app provider that do not provide an activity to configure them, this
+     * is used to get the alias that should be used.
+     * The format is the same as the activity should return, i.e.
+     * 
+     * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
+     * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
+     * 
+     * as the keys for the bundle.
+     */
     @Override public android.os.Bundle getCertificateMetaData(java.lang.String alias) throws android.os.RemoteException
     {
       return null;
@@ -55,7 +54,6 @@ public interface ExternalCertificateProvider extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements de.blinkt.openvpn.api.ExternalCertificateProvider
   {
-    private static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.ExternalCertificateProvider";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -83,6 +81,9 @@ public interface ExternalCertificateProvider extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -90,9 +91,11 @@ public interface ExternalCertificateProvider extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_getSignedData:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           byte[] _arg1;
@@ -100,39 +103,32 @@ public interface ExternalCertificateProvider extends android.os.IInterface
           byte[] _result = this.getSignedData(_arg0, _arg1);
           reply.writeNoException();
           reply.writeByteArray(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getCertificateChain:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           byte[] _result = this.getCertificateChain(_arg0);
           reply.writeNoException();
           reply.writeByteArray(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getCertificateMetaData:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           android.os.Bundle _result = this.getCertificateMetaData(_arg0);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements de.blinkt.openvpn.api.ExternalCertificateProvider
     {
@@ -150,10 +146,10 @@ public interface ExternalCertificateProvider extends android.os.IInterface
         return DESCRIPTOR;
       }
       /**
-           * Requests signing the data with RSA/ECB/PKCS1PADDING
-           * for RSA certficate and with NONEwithECDSA for EC certificates
-           * @parm alias the parameter that
-           */
+       * Requests signing the data with RSA/ECB/PKCS1PADDING
+       * for RSA certficate and with NONEwithECDSA for EC certificates
+       * @parm alias the parameter that
+       */
       @Override public byte[] getSignedData(java.lang.String alias, byte[] data) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -164,9 +160,6 @@ public interface ExternalCertificateProvider extends android.os.IInterface
           _data.writeString(alias);
           _data.writeByteArray(data);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSignedData, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSignedData(alias, data);
-          }
           _reply.readException();
           _result = _reply.createByteArray();
         }
@@ -177,10 +170,10 @@ public interface ExternalCertificateProvider extends android.os.IInterface
         return _result;
       }
       /**
-           * Requests the certificate chain for the selected alias
-           * The first certifcate returned is assumed to be
-           * the user certificate
-           */
+       * Requests the certificate chain for the selected alias
+       * The first certifcate returned is assumed to be
+       * the user certificate
+       */
       @Override public byte[] getCertificateChain(java.lang.String alias) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -190,9 +183,6 @@ public interface ExternalCertificateProvider extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(alias);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getCertificateChain, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getCertificateChain(alias);
-          }
           _reply.readException();
           _result = _reply.createByteArray();
         }
@@ -203,19 +193,18 @@ public interface ExternalCertificateProvider extends android.os.IInterface
         return _result;
       }
       /**
-           * This function is called for the app to get additional meta information from the
-           * external provider and will be called with the stored alias in the app
-           *
-           * For external app provider that do not provide an activity to configure them, this
-           * is used to get the alias that should be used.
-           * The format is the same as the activity should return, i.e.
-           *
-           * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
-           * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
-           *
-           * as the keys for the bundle.
-           *
-           */
+       * This function is called for the app to get additional meta information from the
+       * external provider and will be called with the stored alias in the app
+       * 
+       * For external app provider that do not provide an activity to configure them, this
+       * is used to get the alias that should be used.
+       * The format is the same as the activity should return, i.e.
+       * 
+       * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
+       * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
+       * 
+       * as the keys for the bundle.
+       */
       @Override public android.os.Bundle getCertificateMetaData(java.lang.String alias) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -225,16 +214,8 @@ public interface ExternalCertificateProvider extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(alias);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getCertificateMetaData, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getCertificateMetaData(alias);
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = android.os.Bundle.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, android.os.Bundle.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -242,53 +223,57 @@ public interface ExternalCertificateProvider extends android.os.IInterface
         }
         return _result;
       }
-      public static de.blinkt.openvpn.api.ExternalCertificateProvider sDefaultImpl;
     }
     static final int TRANSACTION_getSignedData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_getCertificateChain = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_getCertificateMetaData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-    public static boolean setDefaultImpl(de.blinkt.openvpn.api.ExternalCertificateProvider impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static de.blinkt.openvpn.api.ExternalCertificateProvider getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "de.blinkt.openvpn.api.ExternalCertificateProvider";
   /**
-       * Requests signing the data with RSA/ECB/PKCS1PADDING
-       * for RSA certficate and with NONEwithECDSA for EC certificates
-       * @parm alias the parameter that
-       */
+   * Requests signing the data with RSA/ECB/PKCS1PADDING
+   * for RSA certficate and with NONEwithECDSA for EC certificates
+   * @parm alias the parameter that
+   */
   public byte[] getSignedData(java.lang.String alias, byte[] data) throws android.os.RemoteException;
   /**
-       * Requests the certificate chain for the selected alias
-       * The first certifcate returned is assumed to be
-       * the user certificate
-       */
+   * Requests the certificate chain for the selected alias
+   * The first certifcate returned is assumed to be
+   * the user certificate
+   */
   public byte[] getCertificateChain(java.lang.String alias) throws android.os.RemoteException;
   /**
-       * This function is called for the app to get additional meta information from the
-       * external provider and will be called with the stored alias in the app
-       *
-       * For external app provider that do not provide an activity to configure them, this
-       * is used to get the alias that should be used.
-       * The format is the same as the activity should return, i.e.
-       *
-       * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
-       * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
-       *
-       * as the keys for the bundle.
-       *
-       */
+   * This function is called for the app to get additional meta information from the
+   * external provider and will be called with the stored alias in the app
+   * 
+   * For external app provider that do not provide an activity to configure them, this
+   * is used to get the alias that should be used.
+   * The format is the same as the activity should return, i.e.
+   * 
+   * EXTRA_ALIAS = "de.blinkt.openvpn.api.KEY_ALIAS"
+   * EXTRA_DESCRIPTION = "de.blinkt.openvpn.api.KEY_DESCRIPTION"
+   * 
+   * as the keys for the bundle.
+   */
   public android.os.Bundle getCertificateMetaData(java.lang.String alias) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+  }
 }
